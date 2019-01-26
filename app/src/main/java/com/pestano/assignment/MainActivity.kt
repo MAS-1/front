@@ -9,11 +9,17 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+
+
+import com.firebase.ui.auth.AuthUI
+
 
 
 
 class MainActivity : AppCompatActivity() {
-
+    private var mAuth: FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
