@@ -4,7 +4,8 @@
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
-                                             tools:context=".MainActivity">
+                                             tools:context=".MainActivity"
+                                             android:paddingBottom="@dimen/padding" android:paddingTop="@dimen/padding">
 
     <EditText
             android:id="@+id/editText"
@@ -14,12 +15,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/edit_message"
+            android:inputType="textMultiLine"
             app:layout_constraintEnd_toStartOf="@id/send_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" android:hint="@string/edit_message"/>
 
     <Button
             android:id="@+id/send_button"
@@ -32,5 +32,5 @@
             android:text="@string/button_send"
             app:layout_constraintBaseline_toBaselineOf="@+id/editText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editText" />
+            app:layout_constraintStart_toEndOf="@+id/editText"/>
 </android.support.constraint.ConstraintLayout>
