@@ -1,15 +1,16 @@
 package com.pestano.assignment
 
-import android.app.ActionBar
-import android.content.Intent
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.support.v7.widget.CardView
+import android.view.Gravity
 import android.view.View
+import android.widget.*
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TableRow
-import android.widget.TextView
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,23 +18,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+    @SuppressLint("PrivateResource")
     fun sendMessage(view: View) {
         val editText = findViewById<EditText>(R.id.editText)
         val message = editText.text.toString()
-        val intent = Intent(this, DisplayMessageActivity::class.java).apply {
-            putExtra(EXTRA_MESSAGE, message)
-        }
-        startActivity(intent)
-//        val textView = findViewById<TextView>(R.id.textViewMain).apply {
-//            text = message
-//        }
-//        val lparams = ViewGroup.LayoutParams(
-//            TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT
-//        )
-//
-//        val tv = TextView(this)
-//        tv.layoutParams = lparams
-//        tv.text = "test"
-//        this.addContentView(tv,lparams)
+
+        val linearLayout = findViewById<LinearLayout>(R.id.linLayout)
+        val cv = CardView(this)
+        val tv = TextView(this)
+
+        tv.gravity = Gravity.CENTER
+        tv.text = message
+        tv.textSize = 20F
+        tv.setTextColor(Color.WHITE)
+        linearLayout.addView(cv)
+        val layoutParams = cv.layoutParams as ViewGroup.MarginLayoutParams
+        layoutParams.setMargins(0, 8, 0, 8)
+        cv.requestLayout()
+
+        cv.addView(tv)
+        cv.setBackgroundColor(resources.getColor(R.color.background_floating_material_dark))
+
     }
 }
