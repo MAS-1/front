@@ -7,11 +7,11 @@
                                              tools:context=".MainActivity">
 
     <Button
-            android:text="Button"
+            android:text="Sign out"
             android:layout_width="88dp"
             android:layout_height="wrap_content" android:id="@+id/sign_out"
             tools:layout_editor_absoluteY="57dp" app:layout_constraintStart_toStartOf="parent"
-    />
+            android:onClick="signOut" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
     <EditText
             android:id="@+id/editText"
             android:layout_width="0dp"

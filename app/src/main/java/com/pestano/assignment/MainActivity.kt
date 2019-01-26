@@ -1,6 +1,7 @@
 package com.pestano.assignment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -45,5 +46,14 @@ class MainActivity : AppCompatActivity() {
         cv.addView(tv)
         cv.setBackgroundColor(resources.getColor(R.color.background_floating_material_dark))
 
+    }
+    fun signOut(view: View) {
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                // user is now signed out
+                startActivity(Intent(this, FirebaseUIActivity::class.java))
+                finish()
+            }
     }
 }
