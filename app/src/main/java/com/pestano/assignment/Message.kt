@@ -1,11 +1,12 @@
 package com.pestano.assignment
 
-import android.graphics.Picture
+import com.firebase.ui.auth.data.model.User
+import java.util.*
 
-data class Message(
-    var name: String = "",
-    var mail: String = "",
-    var message_counter: Int = 0,
-    var rank: String = ""
-    //var profile_picture: Picture
-)
+data class Message {
+    var title: String = "",
+    var content: String = "",
+    var author: User_profile = null,
+    var creation_date: Date = null,
+    var category: String = ""
+}
