@@ -1,33 +1,31 @@
 package com.pestano.assignment
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.CardView
 import android.view.Gravity
 import android.view.View
-import android.widget.*
 import android.view.ViewGroup
-import com.google.firebase.auth.FirebaseAuth
-
-
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.firebase.ui.auth.AuthUI
-
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var database: DatabaseReference
     private var mAuth: FirebaseAuth? = null
+    var db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-
-
     }
     @SuppressLint("PrivateResource")
     fun sendMessage(view: View) {
@@ -55,6 +53,20 @@ class MainActivity : AppCompatActivity() {
         editText.text = null
 
 
+        val messageSent: HashMap<Any, Any> = HashMap()
+        messageSent["title"] = "second message"
+        messageSent["content"] = message
+
+
+// Add a new document with a generated ID
+        db.collection("messages")
+            .add(messageSent)
+            .addOnSuccessListener { documentReference ->
+                System.out.println(
+                    "DocumentSnapshot added with ID: " + documentReference.id
+                )
+            }
+            .addOnFailureListener { e -> System.out.println("Error adding document$e") }
     }
     fun signOut(view: View) {
         AuthUI.getInstance()
