@@ -8,6 +8,58 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:240027775367:android:87fcb66cc6ca320a",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240027775367-ekvvue73fm78c8fd1oroiaa3103gs41c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.quickstart.auth",
+            "certificate_hash": "0d2b2540b0ff256ffb34cc3e6d0549020ed8f446"
+          }
+        },
+        {
+          "client_id": "240027775367-4cadjf0kg6e2ah356uur0iggravvt03e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.quickstart.auth",
+            "certificate_hash": "3331694a3d205967dddabcd1778859beaec50e34"
+          }
+        },
+        {
+          "client_id": "240027775367-32g1u491gc3a8ih5g40i32fhlt7l5rks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu4dKiwMNyNTpjPgO0MZtJPskyJltHBTI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240027775367-32g1u491gc3a8ih5g40i32fhlt7l5rks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:240027775367:android:d8b64b386e190987",
         "android_client_info": {
           "package_name": "com.pestano.assignment"
