@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.*
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 import com.firebase.ui.auth.AuthUI
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
     @SuppressLint("PrivateResource")
     fun sendMessage(view: View) {
-        val editText = findViewById<EditText>(R.id.editText)
+        val editText = findViewById<EditText>(R.id.enter_message_edit)
         val message = editText.text.toString()
 
         val linearLayout = findViewById<LinearLayout>(R.id.linLayout)
@@ -45,6 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         cv.addView(tv)
         cv.setBackgroundColor(resources.getColor(R.color.background_floating_material_dark))
+
+        editText.text = null
+
 
     }
     fun signOut(view: View) {
