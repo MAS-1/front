@@ -73,7 +73,7 @@ class FirebaseUIActivity : AppCompatActivity(), View.OnClickListener {
             .setAvailableProviders(listOf<AuthUI.IdpConfig>(
                 AuthUI.IdpConfig.GoogleBuilder().build(),
                 AuthUI.IdpConfig.EmailBuilder().build()))
-            .setLogo(R.mipmap.ic_launcher)
+            .setLogo(R.mipmap.ic_gt)
             .build()
 
         startActivityForResult(intent, RC_SIGN_IN)

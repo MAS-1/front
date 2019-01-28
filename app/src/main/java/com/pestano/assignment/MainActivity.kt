@@ -2,6 +2,7 @@ package com.pestano.assignment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,6 @@ import android.view.View
 import android.widget.*
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 import com.firebase.ui.auth.AuthUI
@@ -24,10 +24,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+
+
     }
     @SuppressLint("PrivateResource")
     fun sendMessage(view: View) {
-        val editText = findViewById<EditText>(R.id.editText)
+
+
+        val editText = findViewById<EditText>(R.id.enter_message_edit)
         val message = editText.text.toString()
 
         val linearLayout = findViewById<LinearLayout>(R.id.linLayout)
@@ -44,7 +50,10 @@ class MainActivity : AppCompatActivity() {
         cv.requestLayout()
 
         cv.addView(tv)
-        cv.setBackgroundColor(resources.getColor(R.color.background_floating_material_dark))
+        cv.setBackgroundResource(R.color.colorPrimary)
+
+        editText.text = null
+
 
     }
     fun signOut(view: View) {
