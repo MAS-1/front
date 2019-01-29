@@ -2,17 +2,18 @@ package com.pestano.assignment
 
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
+import android.widget.ListView
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.firestore.QuerySnapshot
+import java.sql.Timestamp
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,29 @@ class MainActivity : AppCompatActivity() {
 
         val listView: ListView = findViewById(R.id.messages_ListView)
 
-        listView.adapter = MyCustomAdapter(this)
+        val adapter = MyCustomAdapter(this)
+        listView.adapter = adapter
+
+        db.collection("messages").orderBy("timestamp").addSnapshotListener( EventListener<QuerySnapshot> { value, e ->
+            if (e != null) {
+                Log.w("message no existing", "Listen failed.", e)
+                return@EventListener
+            }
+
+            val cities = ArrayList<String>()
+            for (doc in value!!) {
+                if (doc.get("title") != null && doc.get("content") != null) {
+                    Log.d("data listener", "Current data: " + value.documents)
+                    val m:Message = doc.toObject(Message::class.java)
+//                    val m = Message(doc["title"] as String, doc["content"] as String,doc["author"],doc["timestamp"])
+                    adapter.addItem(m)
+                    Log.d("receive data", doc.id + " => " + doc.data + " content : " + doc["content"])
+                }
+            }
+            Log.d("message processed", "Current cites in CA: $cities")
+
+        })
+
     }
 
 
@@ -37,32 +60,16 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.enter_message_EditText)
         val message = editText.text.toString()
 
-//        val linearLayout = findViewById<LinearLayout>(R.id.linLayout)
-//        val cv = CardView(this)
-//        val tv = TextView(this)
-//
-//        tv.gravity = Gravity.CENTER
-//        tv.text = message
-//        tv.textSize = 20F
-//        tv.setTextColor(Color.WHITE)
-//        linearLayout.addView(cv)
-//        val layoutParams = cv.layoutParams as ViewGroup.MarginLayoutParams
-//        layoutParams.setMargins(0, 8, 0, 8)
-//        cv.requestLayout()
-//
-//        cv.addView(tv)
-//        cv.setBackgroundResource(R.color.colorPrimary)
-
         editText.text = null
 
-
+        val timestamp = Timestamp(System.currentTimeMillis())
 
 
         val messageSent: HashMap<Any, Any> = HashMap()
         messageSent["title"] = "second message"
         messageSent["content"] = message
-
-
+        messageSent["timestamp"] = timestamp
+        messageSent[]
 // Add a new document with a generated ID
         db.collection("messages")
             .add(messageSent)

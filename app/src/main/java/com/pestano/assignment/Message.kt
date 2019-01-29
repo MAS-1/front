@@ -1,11 +1,11 @@
 package com.pestano.assignment
 
-import java.util.*
+import java.sql.Timestamp
 
 data class Message(
-    var title: String = "",
-    var content: String = ""//,
-//    var author: User_profile? = null,
-//    var creation_date: Date? = null,
-//    var category: String = ""
+    var title: String,
+    var content: String,
+    var author: String,
+    var timestamp: Timestamp,
+    var category: String
 )
