@@ -17,11 +17,8 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
-import java.sql.Date
 import java.sql.Timestamp
-import java.time.LocalDate
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,27 +47,35 @@ class MainActivity : AppCompatActivity() {
 
         val editText = findViewById<EditText>(R.id.enter_message_EditText)
         val message = editText.text.toString()
+        if(message!="") {
+            editText.text = null
 
-        editText.text = null
-
-        val timestamp = Timestamp(System.currentTimeMillis())
+            val timestamp = Timestamp(System.currentTimeMillis())
 //        timestamp = com.google.firebase.Timestamp(System.currentTimeMillis())
 
 
-        val messageSent: HashMap<Any, Any?> = HashMap()
-        messageSent["title"] = "second message"
-        messageSent["content"] = message
-        messageSent["timestamp"] = timestamp
-        messageSent["author"] = FirebaseAuth.getInstance().currentUser?.displayName
-// Add a new document with a generated ID
-        db.collection("messages")
-            .add(messageSent)
-            .addOnSuccessListener { documentReference ->
-                System.out.println(
-                    "DocumentSnapshot added with ID: " + documentReference.id
-                )
+            val messageSent: HashMap<Any, Any?> = HashMap()
+            messageSent["title"] = "second message"
+            messageSent["content"] = message
+            messageSent["timestamp"] = timestamp
+            if(FirebaseAuth.getInstance().currentUser!=null ){
+                messageSent["author"] = FirebaseAuth.getInstance().currentUser?.displayName
+
             }
-            .addOnFailureListener { e -> System.out.println("Error adding document$e") }
+            else {
+                messageSent["author"] = FirebaseAuth.getInstance().currentUser?.email!!.split("@")[0]
+            }
+// Add a new document with a generated ID
+            db.collection("messages")
+                .add(messageSent)
+                .addOnSuccessListener { documentReference ->
+                    System.out.println(
+                        "DocumentSnapshot added with ID: " + documentReference.id
+                    )
+                }
+                .addOnFailureListener { e -> System.out.println("Error adding document$e") }
+        }
+
     }
     fun signOut(view: View) {
         AuthUI.getInstance()
@@ -95,8 +100,6 @@ class MainActivity : AppCompatActivity() {
                 if (doc.get("title") != null && doc.get("content") != null) {
                     Log.d("data listener", "Current data: " + value.documents)
                     val m:Message = doc.toObject(Message::class.java)
-//                    val m = Message(doc["title"] as String, doc["content"] as String,doc["author"] as String,
-//                        Timestamp(doc["timestamp"] as Long),doc["category"] as String)
 
                     adapter.addItem(m)
 

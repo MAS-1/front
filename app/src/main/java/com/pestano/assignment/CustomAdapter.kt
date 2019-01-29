@@ -23,7 +23,7 @@ class MyCustomAdapter(context: Context): BaseAdapter() {
         titleTextView.text = messages[position].content
 
         val contentTextView = rowMain.findViewById<TextView>(R.id.content_TextView)
-        contentTextView.text = "Row number : $position"
+        contentTextView.text = messages[position].author
 
         return rowMain
     }
