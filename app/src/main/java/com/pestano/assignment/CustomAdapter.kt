@@ -42,6 +42,17 @@ class MyCustomAdapter(context: Context): BaseAdapter() {
     }
 
     fun addItem(m:Message) {
-        messages.add(m)
+        if(!(contains(m)))
+        messages.add(0,m)
     }
+
+    fun contains(m:Message) : Boolean {
+        for(mes in messages) {
+            if(mes.author == m.author && mes.category==m.category && mes.timestamp == m.timestamp && mes.title == m.title) {
+                return true
+            }
+        }
+        return false
+    }
+
 }
