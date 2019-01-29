@@ -13,11 +13,7 @@ import android.widget.*
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 
-
 import com.firebase.ui.auth.AuthUI
-
-
-
 
 class MainActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
@@ -25,14 +21,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-
-
     }
     @SuppressLint("PrivateResource")
     fun sendMessage(view: View) {
-
-
         val editText = findViewById<EditText>(R.id.enter_message_edit)
         val message = editText.text.toString()
 
