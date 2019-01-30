@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         val listView: ListView = findViewById(R.id.messages_ListView)
 
+//        var fab = findViewById<FloatingActionButton>(R.id.write_floatingButton)
+//        fab.setOnClickListener{
+//            val intent = Intent(this, WritingActivity::class.java)
+//            startActivity(intent)
+//        }
+
         listView.adapter = adapter
 
         readFromDB()
@@ -44,34 +51,35 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    @SuppressLint("PrivateResource")
-    fun sendMessage(view: View) {
 
-
-        val editText = findViewById<EditText>(R.id.enter_message_EditText)
-        val message = editText.text.toString()
-
-        editText.text = null
-
-        val timestamp = Timestamp(System.currentTimeMillis())
-//        timestamp = com.google.firebase.Timestamp(System.currentTimeMillis())
-
-
-        val messageSent: HashMap<Any, Any?> = HashMap()
-        messageSent["title"] = "second message"
-        messageSent["content"] = message
-        messageSent["timestamp"] = timestamp
-        messageSent["author"] = FirebaseAuth.getInstance().currentUser?.displayName
-// Add a new document with a generated ID
-        db.collection("messages")
-            .add(messageSent)
-            .addOnSuccessListener { documentReference ->
-                System.out.println(
-                    "DocumentSnapshot added with ID: " + documentReference.id
-                )
-            }
-            .addOnFailureListener { e -> System.out.println("Error adding document$e") }
-    }
+//    @SuppressLint("PrivateResource")
+//    fun sendMessage(view: View) {
+//
+//
+//        val editText = findViewById<EditText>(R.id.enter_message_EditText)
+//        val message = editText.text.toString()
+//
+//        editText.text = null
+//
+//        val timestamp = Timestamp(System.currentTimeMillis())
+////        timestamp = com.google.firebase.Timestamp(System.currentTimeMillis())
+//
+//
+//        val messageSent: HashMap<Any, Any?> = HashMap()
+//        messageSent["title"] = "second message"
+//        messageSent["content"] = message
+//        messageSent["timestamp"] = timestamp
+//        messageSent["author"] = FirebaseAuth.getInstance().currentUser?.displayName
+//// Add a new document with a generated ID
+//        db.collection("messages")
+//            .add(messageSent)
+//            .addOnSuccessListener { documentReference ->
+//                System.out.println(
+//                    "DocumentSnapshot added with ID: " + documentReference.id
+//                )
+//            }
+//            .addOnFailureListener { e -> System.out.println("Error adding document$e") }
+//    }
     fun signOut(view: View) {
         AuthUI.getInstance()
             .signOut(this)
@@ -109,4 +117,12 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+
+    fun switchActivity(view: View){
+        val intent = Intent(this, WritingActivity::class.java)
+        startActivity(intent)
+    }
+
+
+
 }

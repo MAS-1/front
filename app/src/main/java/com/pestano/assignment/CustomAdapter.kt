@@ -17,13 +17,13 @@ class MyCustomAdapter(context: Context): BaseAdapter() {
     @SuppressLint("ViewHolder", "SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val layoutInflater = LayoutInflater.from(mContext)
-        val rowMain = layoutInflater.inflate(R.layout.message_list, parent, false)
+        val rowMain = layoutInflater.inflate(R.layout.message_adaptor, parent, false)
 
         val titleTextView = rowMain.findViewById<TextView>(R.id.title_TextView)
-        titleTextView.text = messages[position].content
+        titleTextView.text = messages[position].title
 
         val contentTextView = rowMain.findViewById<TextView>(R.id.content_TextView)
-        contentTextView.text = "Row number : $position"
+        contentTextView.text = messages[position].content
 
         return rowMain
     }
